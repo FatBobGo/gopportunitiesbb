@@ -9,10 +9,10 @@
 
 @name = hello
 
-GET http://{{host}}/hello HTTP/1.1
+GET http://{{host}}/api/v1/hello HTTP/1.1
 
 ###
-GET http://{{host}}/ping HTTP/1.1
+GET http://{{host}}/api/v1/ping HTTP/1.1
 
 ###
 
