@@ -1,8 +1,6 @@
 package config
 
 import (
-	"errors"
-
 	"gorm.io/gorm"
 )
 
@@ -12,8 +10,8 @@ var (
 )
 
 func Init() error {
-	// return nil
-	return errors.New("not implemented")
+	return nil
+	// return errors.New("not implemented")
 }
 
 func GetLogger(prefix string) *Logger {

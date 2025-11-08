@@ -19,6 +19,13 @@ func main() {
 		// panic(err)
 	}
 
+	// Database init
+	_, err = config.InitializeSQLite()
+	if err != nil {
+		logger.Errorf("Failed to initialize database: %v", err)
+		return
+	}
+
 	// router.Initialize()
 	router.Initialize()
 	
