@@ -7,8 +7,12 @@
 
 ###
 
-@name = hello
+@name = amit
 
+###
+GET http://{{host}}/api/v1/status HTTP/1.1
+
+###
 GET http://{{host}}/api/v1/hello HTTP/1.1
 
 ###
@@ -16,11 +20,33 @@ GET http://{{host}}/api/v1/ping HTTP/1.1
 
 ###
 
-PATCH http://{{host}}/authors/{{name}} HTTP/1.1
+POST http://{{host}}/api/v1/author/{{name}} HTTP/1.1
 Content-Type: {{contentType}}
 
 {
     "content": "foo bar",
     "created_at": "{{createdAt}}",
+    "modified_by": "{{modifiedBy}}",
+    "additional_info" : "some extra details"
+}
+
+### /opening endpoints
+POST http://{{host}}/api/v1/opening HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "title": "{{name}}'s Position",
+    "description": "Job opening for {{name}}",
+    "location": "Remote",
+    "salary": 100000,
+    "created_at": "{{createdAt}}",
     "modified_by": "{{modifiedBy}}"
 }
+
+### list openings
+GET http://{{host}}/api/v1/openings HTTP/1.1
+Content-Type: {{contentType}}
+
+### show opening
+GET http://{{host}}/api/v1/opening/1 HTTP/1.1
+Content-Type: {{contentType}}
