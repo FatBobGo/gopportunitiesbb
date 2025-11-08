@@ -20,7 +20,8 @@ func main() {
 	}
 
 	// Database init
-	_, err = config.InitializeSQLite()
+	// _, err = config.InitializeSQLite()
+	_, err = config.GetSQLite()
 	if err != nil {
 		logger.Errorf("Failed to initialize database: %v", err)
 		return

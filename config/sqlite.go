@@ -31,7 +31,7 @@ func InitializeSQLite() (*gorm.DB, error) {
 		file.Close()
 		logger.Info("database file created successfully")
 	} else {
-		logger.Info("database file already exists")
+		logger.Infof("database file %s already exists", dbPath)
 	}
 
 	db, err := gorm.Open(sqlite.Open("./db/database.db"), &gorm.Config{})
