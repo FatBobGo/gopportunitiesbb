@@ -22,6 +22,7 @@ func initializeRoutes(router *gin.Engine)  {
 		})
 
 		v1.POST("/author/:name", handler.CreateAuthor)
+		// Opening routes
 		v1.POST("/opening", handler.CreateOpeningHandler)
 		v1.GET("/openings", handler.ListOpeningsHandler)
 		v1.GET("/opening/:id", handler.ShowOpeningHandler)
