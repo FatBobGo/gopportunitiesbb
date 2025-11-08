@@ -43,6 +43,14 @@ Content-Type: {{contentType}}
     "modified_by": "{{modifiedBy}}"
 }
 
+### /opening endpoints
+POST http://{{host}}/api/v1/opening HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "role": "Software Engineer"
+}
+
 ### list openings
 GET http://{{host}}/api/v1/openings HTTP/1.1
 Content-Type: {{contentType}}
