@@ -24,43 +24,27 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/opening": {
+        "/opening": {
             "post": {
+                "description": "Create a new job opening with role, company, and remote status",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "openings"
                 ],
                 "summary": "Create an opening job",
                 "parameters": [
                     {
-                        "maxLength": 100,
-                        "minLength": 3,
-                        "description": "job role",
-                        "name": "role",
-                        "in": "body",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "default": "1",
-                        "description": "job description",
-                        "name": "company",
-                        "in": "body",
-                        "schema": {
-                            "type": "string",
-                            "enum": [
-                                "0",
-                                "1"
-                            ]
-                        }
-                    },
-                    {
-                        "description": "Remote job ind",
-                        "name": "Remote",
+                        "description": "Request body",
+                        "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "boolean"
+                            "$ref": "#/definitions/handler.CreateOpeningRequest"
                         }
                     }
                 ],
@@ -68,23 +52,92 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": true
+                            "$ref": "#/definitions/handler.CreateOpeningResponse"
                         }
                     },
                     "400": {
-                        "description": "参数错误",
+                        "description": "Bad Request",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": true
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     },
                     "500": {
-                        "description": "内部错误",
+                        "description": "Internal Server Error",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "handler.CreateOpeningRequest": {
+            "type": "object",
+            "properties": {
+                "company": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "boolean"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "salary": {
+                    "type": "integer"
+                }
+            }
+        },
+        "handler.CreateOpeningResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/schemas.OpeningResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "schemas.OpeningResponse": {
+            "type": "object",
+            "properties": {
+                "company": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "boolean"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "salary": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         }

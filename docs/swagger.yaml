@@ -1,4 +1,50 @@
 basePath: /api/v1
+definitions:
+  handler.CreateOpeningRequest:
+    properties:
+      company:
+        type: string
+      link:
+        type: string
+      location:
+        type: string
+      remote:
+        type: boolean
+      role:
+        type: string
+      salary:
+        type: integer
+    type: object
+  handler.CreateOpeningResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.OpeningResponse'
+      message:
+        type: string
+    type: object
+  handler.ErrorResponse:
+    properties:
+      errorCode:
+        type: string
+      message:
+        type: string
+    type: object
+  schemas.OpeningResponse:
+    properties:
+      company:
+        type: string
+      link:
+        type: string
+      location:
+        type: string
+      remote:
+        type: boolean
+      role:
+        type: string
+      salary:
+        format: int64
+        type: integer
+    type: object
 externalDocs:
   description: OpenAPI
   url: https://swagger.io/resources/open-api/
@@ -16,49 +62,36 @@ info:
   title: Go + Gin + Swagger API Demo
   version: "1.0"
 paths:
-  /api/v1/opening:
+  /opening:
     post:
+      consumes:
+      - application/json
+      description: Create a new job opening with role, company, and remote status
       parameters:
-      - description: job role
+      - description: Request body
         in: body
-        maxLength: 100
-        minLength: 3
-        name: role
-        schema:
-          type: string
-      - default: "1"
-        description: job description
-        in: body
-        name: company
-        schema:
-          enum:
-          - "0"
-          - "1"
-          type: string
-      - description: Remote job ind
-        in: body
-        name: Remote
+        name: request
         required: true
         schema:
-          type: boolean
+          $ref: '#/definitions/handler.CreateOpeningRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            additionalProperties: true
-            type: object
+            $ref: '#/definitions/handler.CreateOpeningResponse'
         "400":
-          description: 参数错误
+          description: Bad Request
           schema:
-            additionalProperties: true
-            type: object
+            $ref: '#/definitions/handler.ErrorResponse'
         "500":
-          description: 内部错误
+          description: Internal Server Error
           schema:
-            type: string
+            $ref: '#/definitions/handler.ErrorResponse'
       summary: Create an opening job
+      tags:
+      - openings
 securityDefinitions:
   BasicAuth:
     type: basic
