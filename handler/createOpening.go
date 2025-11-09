@@ -20,10 +20,11 @@ func CreateOpeningHandler(ctx *gin.Context) {
 	logger.Infof("Received request to create opening: %+v", request)
 
 	if err := request.Validate(); err != nil {
-		logger.Errorf("Invalid request to create opening: %v", err.Error())
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
+		// logger.Errorf("Invalid request to create opening: %v", err.Error())
+		// ctx.JSON(http.StatusBadRequest, gin.H{
+		// 	"error": err.Error(),
+		// })
+		sendErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		return
 	}
 	// request := CreateOpeningRequest{}
