@@ -1,13 +1,14 @@
 package handler
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func errParamIsRequired(name string, typ string) error {
 		return fmt.Errorf("param: %s (type: %s) is required", name, typ)
 }
 
 // CreateOpening
-
 type CreateOpeningRequest struct {
 	Role string `json:"role"`
 	Company string `json:"company"`
@@ -36,3 +37,21 @@ func (r *CreateOpeningRequest) Validate() error {
 	return nil	
 }
 
+type UpdateOpeningRequest struct {
+	Role *string `json:"role"`
+	Company *string `json:"company"`
+	Location *string `json:"location"`
+	Remote *bool `json:"remote"`
+	Link *string `json:"link"`
+	Salary *int64 `json:"salary"`
+}
+
+func (u *UpdateOpeningRequest) Validate() error {
+	if u == nil {
+		return fmt.Errorf("malformed request body (request body is empty)")
+	}
+	// if *u.Role == "" || *u.Link == "" || *u.Company == "" || *u.Location == "" {
+	// 	return fmt.Errorf("Role, Link, Company & Location can not be blank")
+	// }
+	return nil
+}
