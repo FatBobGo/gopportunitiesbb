@@ -1,9 +1,26 @@
 package handler
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/nathan/gopportunitiesbb/config"
+	"gorm.io/gorm"
 )
+
+var (
+	logger *config.Logger
+	db *gorm.DB
+)
+
+func InitializeHandler() {
+	logger = config.GetLogger("handler")
+	var err error
+	db, err = config.GetSQLite()
+	if err != nil {
+		logger.Errorf("not able to init handler: %v", err)
+	}
+}
 
 func GetStatus(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{

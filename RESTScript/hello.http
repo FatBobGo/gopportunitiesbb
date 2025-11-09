@@ -48,7 +48,13 @@ POST http://{{host}}/api/v1/opening HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-    "role": "Software Engineer"
+    "role": "Software Engineer",
+    "company": "Example Corp",
+    "Location": "UK",
+    "Remote": true,
+    "Link" : "https://example.com/job",
+    "Salary": 60000,
+    "test": "this field will not show"
 }
 
 ### list openings
