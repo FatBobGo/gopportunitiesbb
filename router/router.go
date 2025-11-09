@@ -2,6 +2,7 @@ package router
 
 import (
 	"log"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/nathan/gopportunitiesbb/docs"
@@ -9,6 +10,7 @@ import (
 	"github.com/nathan/gopportunitiesbb/handler"
 	swaggerFiles "github.com/swaggo/files"     // swagger embed files
 	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
+	"github.com/gin-contrib/cors"
 )
 
 func initializeRoutes(router *gin.Engine)  {
@@ -47,6 +49,17 @@ func initializeRoutes(router *gin.Engine)  {
 
 func Initialize()  {
 	router := gin.Default()
+
+	// CORS 配置：允许所有来源（开发环境），支持 POST、OPTIONS 等方法
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"}, // 或指定如 []string{"http://localhost:8080"}
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true, // 如果需要 cookies 或 auth
+		MaxAge:           12 * time.Hour, // 预检请求缓存时间
+	}))
+
 	initializeRoutes(router)
 
 	log.Println("Server is running on port 8080")

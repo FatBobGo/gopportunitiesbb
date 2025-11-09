@@ -115,23 +115,44 @@
             "type": "object",
             "properties": {
                 "company": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Tech Corp"
+                },
+                "created_at": {
+                    "type": "string",
+                    "example": "2025-11-09T21:02:00Z"
+                },
+                "deleted_at": {
+                    "type": "string",
+                    "example": "null"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
                 },
                 "link": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "https://example.com/job"
                 },
                 "location": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "New York"
                 },
                 "remote": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "example": true
                 },
                 "role": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Software Engineer"
                 },
                 "salary": {
                     "type": "integer",
-                    "format": "int64"
+                    "example": 100000
+                },
+                "updated_at": {
+                    "type": "string",
+                    "example": "2025-11-09T21:02:00Z"
                 }
             }
         }

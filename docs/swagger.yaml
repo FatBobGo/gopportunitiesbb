@@ -32,18 +32,35 @@ definitions:
   schemas.OpeningResponse:
     properties:
       company:
+        example: Tech Corp
         type: string
+      created_at:
+        example: "2025-11-09T21:02:00Z"
+        type: string
+      deleted_at:
+        example: "null"
+        type: string
+      id:
+        example: 1
+        type: integer
       link:
+        example: https://example.com/job
         type: string
       location:
+        example: New York
         type: string
       remote:
+        example: true
         type: boolean
       role:
+        example: Software Engineer
         type: string
       salary:
-        format: int64
+        example: 100000
         type: integer
+      updated_at:
+        example: "2025-11-09T21:02:00Z"
+        type: string
     type: object
 externalDocs:
   description: OpenAPI
