@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/nathan/gopportunitiesbb/config"
+	"github.com/nathan/gopportunitiesbb/schemas"
 )
 
 func CreateOpeningHandler(ctx *gin.Context) {
@@ -31,32 +32,21 @@ func CreateOpeningHandler(ctx *gin.Context) {
 
 	// ctx.BindJSON(&request)
 
-	if err := db.Create(&request).Error; err != nil {
-		logger.Errorf("Failed to create opening: %v", err)
-		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"error": "Failed to create opening",
-		})
-		return
+	opening := schemas.Opening {
+		Role:     request.Role,
+		Company:  request.Company,
+		Location: request.Location,
+		Remote:   request.Remote,
+		Link:     request.Link,
+		Salary:   request.Salary,
 	}
 
-	// response := OpeningResponse{
-	// 	ID:        request.ID,
-	// 	CreatedAt: request.CreatedAt,
-	// 	UpdatedAt: request.UpdatedAt,
-	// 	Role:      request.Role,
-	// 	Company:   request.Company,
-	// 	Location:  request.Location,
-	// 	Remote:    request.Remote,
-	// 	Link:      request.Link,
-	// 	Salary:    request.Salary,
-	// }
+	if err := db.Create(&opening).Error; err != nil {
+		logger.Errorf("Failed to create opening in DB: %v", err)
+		sendErrorResponse(ctx, http.StatusBadRequest, "Failed to create opening in database")
+		return
+	}
+	// sendSuccessResponse(ctx, http.StatusAccepted, request)
+	sendSuccess(ctx, "create-opening", opening)
 
-	// response := CreateOpeningResponse {
-	// 	Result: "Opening created successfully",
-	// }
-	// ctx.JSON(http.StatusCreated, response)
-
-	// ctx.JSON(http.StatusOK, gin.H{
-	// 	"message": "POST Opening",
-	// })
 }
