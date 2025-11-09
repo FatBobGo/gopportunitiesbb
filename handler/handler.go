@@ -28,6 +28,16 @@ func GetStatus(ctx *gin.Context) {
 	})
 }
 
+// Create an opening job
+// @Summary Create an opening job
+// @Produce json
+// @Param role body string false "job role" minlength(3) maxlength(100)
+// @Param company body string false "job description" Enums(0, 1) default(1)
+// @Param Remote body bool true "Remote job ind" boolean
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} map[string]interface{} "参数错误"
+// @Failure 500 {object} string "内部错误"
+// @Router /api/v1/opening [post]
 func CreateAuthor(ctx *gin.Context) {
 	name := ctx.Param("name")
 
