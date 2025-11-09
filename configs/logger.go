@@ -29,6 +29,26 @@ func NewLogger(p string) *Logger {
 	}
 }
 
+func NewFileLogger(filename string) *Logger {
+    // Open a file for writing logs
+    file, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+    if err != nil {
+        return nil
+    }
+    
+    // Use the file as writer instead of stdout
+    writer := io.Writer(file)
+    logger := log.New(writer, "", log.Ldate|log.Ltime)
+    
+    return &Logger{
+        debug: log.New(writer, "DEBUG: ", logger.Flags()),
+        info: log.New(writer, "INFO: ", logger.Flags()),
+        warning: log.New(writer, "WARNING: ", logger.Flags()),
+        err: log.New(writer, "ERROR: ", logger.Flags()),
+        writer: writer,
+    }
+}
+
 // create non-formatted logs
 func (l *Logger) Debug(v ...interface{}) {
 	l.debug.Println(v...)

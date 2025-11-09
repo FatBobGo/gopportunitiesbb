@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/nathan/gopportunitiesbb/config"
+	"github.com/nathan/gopportunitiesbb/configs"
 	"github.com/nathan/gopportunitiesbb/router"
 )
 
