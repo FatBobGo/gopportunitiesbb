@@ -30,16 +30,16 @@ func GetStatus(ctx *gin.Context) {
 
 // @BasePath /api/v1
 
-// @Summary Create an opening job
-// @Description Create a new job opening with role, company, and remote status
-// @Tags openings
+// @Summary Create an author
+// @Description Create a new author with content, created_at, and modified_by
+// @Tags author
 // @Accept json
 // @Produce json
-// @Param request body CreateOpeningRequest true "Request body"
+// @Param request body requestBody true "Request body"
 // @Success 200 {object} CreateOpeningResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
-// @Router /opening [post]
+// @Router /author/:name [post]
 func CreateAuthor(ctx *gin.Context) {
 	name := ctx.Param("name")
 
